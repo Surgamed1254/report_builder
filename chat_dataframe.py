@@ -520,9 +520,10 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
             # st.write('phase 0')
             formatted_output = output_parser.parse(response)
             new_list = formatted_output['reports_list']
+            reports_data = Refs_Reports(**formatted_output)
 
 
-            dfd = reports_to_dataframe(formatted_output['reports_list'])
+            dfd = reports_to_dataframe(reports_data)
 
             # Display DataFrame in Streamlit
             st.write("Customer Reports Data")
