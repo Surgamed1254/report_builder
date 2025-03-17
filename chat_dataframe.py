@@ -333,6 +333,10 @@ def clear_submit():
     """
     st.session_state["submit"] = False
 
+@st.cache_data
+def convert_df_to_csv(df):
+   return df.to_csv(index=False).encode('utf-8')
+
 
 @st.cache_data(ttl="2h")
 def load_data(uploaded_file):
@@ -507,6 +511,27 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
             # st.write('phase 0')
             formatted_output = output_parser.parse(response)
             new_list = formatted_output['reports_list']
+
+
+            dfd = reports_to_dataframe(formatted_output['reports_list'])
+
+            # Display DataFrame in Streamlit
+            st.write("Customer Reports Data")
+            st.dataframe(dfd)
+            
+            # Convert DataFrame to CSV
+
+            
+            
+            csv_data = convert_df_to_csv(df)
+            
+            # Download button
+            st.download_button(
+                label="Download CSV",
+                data=csv_data,
+                file_name="customer_reports.csv",
+                mime="text/csv"
+            )
 
             pdf_file = generate_pdf(new_list)
             with open(pdf_file, "rb") as f:
