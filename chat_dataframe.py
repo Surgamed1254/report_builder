@@ -527,19 +527,19 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
 
             # Display DataFrame in Streamlit
             st.write("Customer Reports Data")
-            st.dataframe(dfd)
+            # st.dataframe(dfd)
             
             # Convert DataFrame to CSV
 
             
             
-            csv_data = convert_df_to_csv(df)
+            csv_data = convert_df_to_csv(dfd)
             
             # Download button
             st.download_button(
                 label="Download CSV",
                 data=csv_data,
-                file_name="customer_reports.csv",
+                file_name="customer_csv_reports.csv",
                 mime="text/csv"
             )
 
