@@ -350,7 +350,16 @@ def load_data(uploaded_file):
         st.error(f"Unsupported file format: {ext}")
         return None
 
-
+def reports_to_dataframe(reports: Refs_Reports):
+    data = []
+    for report in reports.reports_list:
+        for customer in report.customer_list:
+            row = customer.to_dict()
+            row.update({"item_title": report.item_title, "ref_id": report.ref_id})  # Add report-level fields
+            data.append(row)
+    
+    return pd.DataFrame(data)
+    
 def format_response(user_input: str):
     """Formats response using LLM."""
     reports = search_dataframe(user_input)
