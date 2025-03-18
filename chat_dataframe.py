@@ -61,7 +61,7 @@ class Customer(BaseModel):
 
 
 class Report_Structure(BaseModel):
-    customer_list: List[Customer]
+    customer_list: List[Customer]=[]
     item_title: str = ""  # Now optional
     ref_id: str = "" 
 
@@ -75,7 +75,7 @@ class Report_Structure(BaseModel):
 
 
 class Refs_Reports(BaseModel):
-    reports_list: List[Report_Structure]
+    reports_list: List[Report_Structure]=[]
 
     def to_dict(self):
         return {
