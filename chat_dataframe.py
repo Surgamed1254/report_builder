@@ -371,7 +371,8 @@ def format_response(user_input: str):
     formatted_output = llm.invoke(example_prompt.format(input=reports_summary))
     return formatted_output.content
 
-
+if "download_clicked" not in st.session_state:
+    st.session_state.download_clicked = False
 
 st.set_page_config(page_title="Customers report builder", page_icon="🦜")
 st.title("🦜 Generate your report with AI ")
@@ -541,13 +542,17 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
                 label="Download CSV",
                 data=csv_data,
                 file_name="customer_csv_reports.csv",
-                mime="text/csv"
+                mime="text/csv",
+                key="download_csv"
             )
+            
 
             pdf_file = generate_pdf(new_list)
             with open(pdf_file, "rb") as f:
+                
                 st.download_button( "Download PDF", f, file_name="customer_report.pdf",
                                            mime="application/pdf",  key="download_pdf" )
+                st.session_state.download_clicked = True
             # st.write('phase 1')
             # st.write(new_list)
             # print("phase 1")
@@ -565,3 +570,5 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
 
         except Exception as e:
             st.error("No data found.Please Try again." + str(e))
+if st.session_state.download_clicked:
+    st.success("Download completed! You can still download the file again.")
