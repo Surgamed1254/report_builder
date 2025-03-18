@@ -553,6 +553,8 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
                 st.download_button( "Download PDF", f, file_name="customer_report.pdf",
                                            mime="application/pdf",  key="download_pdf" )
                 st.session_state.download_clicked = True
+                st.session_state.pdf_data=f
+                st.session_state.csv_data=csv_data
             # st.write('phase 1')
             # st.write(new_list)
             # print("phase 1")
@@ -572,3 +574,13 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
             st.error("No data found.Please Try again." + str(e))
 if st.session_state.download_clicked:
     st.success("Download completed! You can still download the file again.")
+    st.download_button(
+                label="Download CSV",
+                data= st.session_state.csv_data,
+                file_name="customer_csv_reports.csv",
+                mime="text/csv",
+                key="download_csv2"
+            )
+    st.download_button( "Download PDF",  st.session_state.pdf_data, file_name="customer_report.pdf",
+                                           mime="application/pdf",  key="download_pdf2" )
+    
