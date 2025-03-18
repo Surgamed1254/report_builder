@@ -372,11 +372,7 @@ def format_response(user_input: str):
 
 
 
-st.set_page_config(page_title="Customers report builder", page_icon="🦜", menu_items={
-        "Get Help": None,
-        "Report a bug": None,
-        "About": None
-    })
+st.set_page_config(page_title="Customers report builder", page_icon="🦜")
 st.title("🦜 Generate your report with AI ")
 
 # uploaded_file = st.file_uploader(
