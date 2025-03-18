@@ -42,7 +42,7 @@ class Customer(BaseModel):
     phone: Optional[str] = ""
     price: Optional[str] = ""
     quantity: Optional[str] = ""
-    date: Optional[str] =""None
+    date: Optional[str] =""
 
     def to_dict(self):
         return {
