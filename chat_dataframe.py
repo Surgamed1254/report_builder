@@ -37,12 +37,12 @@ if "GOOGLE_API_KEY" not in os.environ:
 from typing import Optional
 
 class Customer(BaseModel):
-    name: Optional[str] = ""
-    email: Optional[str] = ""
-    phone: Optional[str] = ""
-    price: Optional[str] = ""
-    quantity: Optional[str] = ""
-    date: Optional[str] =""
+    name: str= ""
+    email:str = ""
+    phone: str = ""
+    price: str = ""
+    quantity: str = ""
+    date:str =""
 
     def to_dict(self):
         return {
@@ -62,8 +62,8 @@ class Customer(BaseModel):
 
 class Report_Structure(BaseModel):
     customer_list: List[Customer]
-    item_title: Optional[str] = ""  # Now optional
-    ref_id: Optional[str] = "" 
+    item_title: str = ""  # Now optional
+    ref_id: str = "" 
 
     def to_dict(self):
         return {
@@ -547,7 +547,7 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
             pdf_file = generate_pdf(new_list)
             with open(pdf_file, "rb") as f:
                 st.download_button( "Download PDF", f, file_name="customer_report.pdf",
-                                           mime="application/pdf")
+                                           mime="application/pdf",  key="download_pdf" )
             # st.write('phase 1')
             # st.write(new_list)
             # print("phase 1")
