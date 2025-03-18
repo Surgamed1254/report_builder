@@ -34,14 +34,15 @@ from datetime import datetime
 if "GOOGLE_API_KEY" not in os.environ:
     os.environ["GOOGLE_API_KEY"] =st.secrets['GOOGLE_API_KEY']
 
+from typing import Optional
 
 class Customer(BaseModel):
-    name: str
-    email: str
-    phone: str
-    price: str
-    quantity: str
-    date: str
+    name: Optional[str] = None
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    price: Optional[str] = None
+    quantity: Optional[str] = None
+    date: Optional[str] = None
 
     def to_dict(self):
         return {
