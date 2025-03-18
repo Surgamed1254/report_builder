@@ -37,12 +37,12 @@ if "GOOGLE_API_KEY" not in os.environ:
 from typing import Optional
 
 class Customer(BaseModel):
-    name: Optional[str] = None
-    email: Optional[str] = None
-    phone: Optional[str] = None
-    price: Optional[str] = None
-    quantity: Optional[str] = None
-    date: Optional[str] = None
+    name: Optional[str] = ""
+    email: Optional[str] = ""
+    phone: Optional[str] = ""
+    price: Optional[str] = ""
+    quantity: Optional[str] = ""
+    date: Optional[str] =""None
 
     def to_dict(self):
         return {
@@ -62,8 +62,8 @@ class Customer(BaseModel):
 
 class Report_Structure(BaseModel):
     customer_list: List[Customer]
-    item_title: Optional[str] = None  # Now optional
-    ref_id: Optional[str] = None 
+    item_title: Optional[str] = ""  # Now optional
+    ref_id: Optional[str] = "" 
 
     def to_dict(self):
         return {
