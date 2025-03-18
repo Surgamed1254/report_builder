@@ -452,6 +452,7 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
     # then return  a list of of each ref_id  item title and the list of customers  (name ,customer_phone ,customer_email,date,price , quantity )   thay purchased this item
 
     with st.chat_message("assistant"):
+        st.session_state.download_clicked = False
         # st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
         st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
         output_parser = JsonOutputParser(
