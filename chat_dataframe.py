@@ -62,8 +62,8 @@ class Customer(BaseModel):
 
 class Report_Structure(BaseModel):
     customer_list: List[Customer]
-    item_title: str
-    ref_id: str
+    item_title: Optional[str] = None  # Now optional
+    ref_id: Optional[str] = None 
 
     def to_dict(self):
         return {
