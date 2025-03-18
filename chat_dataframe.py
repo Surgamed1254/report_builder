@@ -589,7 +589,7 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
         except Exception as e:
             st.error("No data found.Please Try again." + str(e))
 if st.session_state.download_clicked:
-    st.success("Download completed! You can still download the file again.")
+    st.success("Completed! You can download the files.")
     st.download_button(
                 label="Download CSV",
                 data= st.session_state.csv_data,
