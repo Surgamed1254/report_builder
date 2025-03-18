@@ -553,7 +553,7 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
                 st.download_button( "Download PDF", f, file_name="customer_report.pdf",
                                            mime="application/pdf",  key="download_pdf" )
                 st.session_state.download_clicked = True
-                st.session_state.pdf_data=f
+                st.session_state.pdf_data=pdf_file
                 st.session_state.csv_data=csv_data
             # st.write('phase 1')
             # st.write(new_list)
@@ -581,6 +581,9 @@ if st.session_state.download_clicked:
                 mime="text/csv",
                 key="download_csv2"
             )
-    st.download_button( "Download PDF",  st.session_state.pdf_data, file_name="customer_report.pdf",
+    with open(st.session_state.pdf_data, "rb") as f:
+                st.download_button( "Download PDF", f, file_name="customer_report.pdf",
                                            mime="application/pdf",  key="download_pdf2" )
+    # st.download_button( "Download PDF",  st.session_state.pdf_data, file_name="customer_report.pdf",
+    #                                        mime="application/pdf",  key="download_pdf2" )
     
