@@ -38,8 +38,8 @@ from typing import Optional
 
 class Customer(BaseModel):
     name: str= ""
-    email:str = ""
-    phone: str = ""
+    email:str = "nan"
+    phone: str = "nan"
     price: str = ""
     quantity: str = ""
     date:str =""
@@ -539,23 +539,28 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
             csv_data = convert_df_to_csv(dfd)
             
             # Download button
-            st.download_button(
-                label="Download CSV",
-                data=csv_data,
-                file_name="customer_csv_reports.csv",
-                mime="text/csv",
-                key="download_csv"
-            )
+            # st.download_button(
+            #     label="Download CSV",
+            #     data=csv_data,
+            #     file_name="customer_csv_reports.csv",
+            #     mime="text/csv",
+            #     key="download_csv"
+            # )
             
 
             pdf_file = generate_pdf(new_list)
-            with open(pdf_file, "rb") as f:
+
+            st.session_state.pdf_data=pdf_file
+            st.session_state.csv_data=csv_data
+             st.session_state.download_clicked = True
+            # st.write('phase 1')
+            # with open(pdf_file, "rb") as f:
                 
-                st.download_button( "Download PDF", f, file_name="customer_report.pdf",
-                                           mime="application/pdf",  key="download_pdf" )
-                st.session_state.download_clicked = True
-                st.session_state.pdf_data=pdf_file
-                st.session_state.csv_data=csv_data
+            #     st.download_button( "Download PDF", f, file_name="customer_report.pdf",
+            #                                mime="application/pdf",  key="download_pdf" )
+            #     st.session_state.download_clicked = True
+            #     st.session_state.pdf_data=pdf_file
+            #     st.session_state.csv_data=csv_data
             # st.write('phase 1')
             # st.write(new_list)
             # print("phase 1")
