@@ -552,7 +552,7 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
 
             st.session_state.pdf_data=pdf_file
             st.session_state.csv_data=csv_data
-             st.session_state.download_clicked = True
+            st.session_state.download_clicked = True
             # st.write('phase 1')
             # with open(pdf_file, "rb") as f:
                 
