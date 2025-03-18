@@ -229,7 +229,7 @@ def generate_pdf(data, filename="customer_report.pdf"):
             c.drawString(30, y_position, "Name")
             c.drawString(185, y_position, "Email")
             c.drawString(350, y_position, "Phone")
-            c.drawString(450, y_position, "Price")
+            c.drawString(430, y_position, "Price")
             c.drawString(500, y_position, "Quantity")
             c.drawString(550, y_position, "Date")
             y_position -= 15
@@ -271,7 +271,7 @@ def generate_pdf(data, filename="customer_report.pdf"):
                     c.drawString(30, y_position,process_name(customer['name']))
                     c.drawString(185, y_position, customer['email'])
                     c.drawString(350, y_position, customer['phone'])
-                    c.drawString(450, y_position, f"${customer['price']}")
+                    c.drawString(430, y_position, f"${customer['price']}")
                     c.drawString(500, y_position, f"{customer['quantity']}")
                     c.drawString(550, y_position, customer['date'])
                     y_position -= 15
