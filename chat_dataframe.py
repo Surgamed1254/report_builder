@@ -178,7 +178,16 @@ prompt_template = FewShotPromptTemplate(
     input_variables=["input"]
 )
 
-
+def process_name(name: str) -> str:
+    """
+    Checks if the given name is more than 25 characters long.
+    - If yes, and it's split by spaces, return the first and last word.
+    - Otherwise, return the full name.
+    """
+    if len(name) > 25 and " " in name:
+        parts = name.split()
+        return f"{parts[0]} {parts[-1]}"  # Return first and last name
+    return name  # Return full name if <= 25 characters or no spaces
 
 
 def generate_pdf(data, filename="customer_report.pdf"):
@@ -257,8 +266,9 @@ def generate_pdf(data, filename="customer_report.pdf"):
                     #     c.drawString(30, y_position, second_line)
                     # else:
                     #     # No need to split, just print the name
-                    #     c.drawString(30, y_position, name)
-                    c.drawString(30, y_position, customer['name'])
+                    #     c.drawString(30, y_position, name)process_name(name: str)
+                    # c.drawString(30, y_position, customer['name'])
+                    c.drawString(30, y_position,process_name(customer['name']))
                     c.drawString(185, y_position, customer['email'])
                     c.drawString(350, y_position, customer['phone'])
                     c.drawString(450, y_position, f"${customer['price']}")
