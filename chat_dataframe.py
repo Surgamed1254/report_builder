@@ -209,7 +209,7 @@ def generate_pdf(data, filename="customer_report.pdf"):
 
     # Add Current Date
     
-    c.setFont("Helvetica", 10)
+    c.setFont("Helvetica", 8)
     c.drawString(30, y_position, f"Date: {current_date}")
     y_position -= 20
 
