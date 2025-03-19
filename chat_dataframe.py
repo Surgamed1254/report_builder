@@ -209,7 +209,7 @@ def generate_pdf(data, filename="customer_report.pdf"):
 
     # Add Current Date
     
-    c.setFont("Helvetica", 8)
+    c.setFont("Helvetica", 10)
     c.drawString(30, y_position, f"Date: {current_date}")
     y_position -= 20
 
@@ -237,7 +237,7 @@ def generate_pdf(data, filename="customer_report.pdf"):
             # Loop through customer data
             for customer in report['customer_list']:
                 try:
-                    c.setFont("Helvetica", 10)
+                    c.setFont("Helvetica", 9)
                                         # Check if the name is too long and split it into two lines
                     # name = customer['name']
                     # name_width = c.stringWidth(name, "Helvetica", 10)
