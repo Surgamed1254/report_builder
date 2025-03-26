@@ -376,10 +376,12 @@ def format_response(user_input: str):
     reports = search_dataframe(user_input)
     reports_summary = str(reports)
     # st.write(reports)
-    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_tokens=4096)
-    # agent = initialize_agent(tools=[], agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, llm=llm)
-    formatted_output = llm.invoke(example_prompt.format(input=reports_summary))
-    return formatted_output.content
+    return {"reports_list":reports}
+
+    # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_tokens=4096)
+    # # agent = initialize_agent(tools=[], agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, llm=llm)
+    # formatted_output = llm.invoke(example_prompt.format(input=reports_summary))
+    # return formatted_output.content
 
 if "download_clicked" not in st.session_state:
     st.session_state.download_clicked = False
