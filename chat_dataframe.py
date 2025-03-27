@@ -374,6 +374,8 @@ def reports_to_dataframe(reports: Refs_Reports):
 def format_response(user_input: str):
     """Formats response using LLM."""
     reports = search_dataframe(user_input)
+    print("ziizo")
+    print(len(reports))
     reports_summary = str(reports)
     # st.write(reports)
     
