@@ -106,12 +106,12 @@ def search_dataframe(user_input):
         if ref_id not in report_dict:
             report_dict[ref_id] = {"item_title": row["Item Title"], "customer_list": []}
         report_dict[ref_id]["customer_list"].append({
-            "name": row["Name"],
-            "phone": row["customer_phone"],
-            "email": row["customer_email"],
+            "name": str(row["Name"]),
+            "phone": str(row["customer_phone"]),
+            "email": str(row["customer_email"]),
             "quantity": str(row["Quantity"]),
             "price": str(row["price"]),
-            'date':row["Date"]
+            'date':str(row["Date"])
         })
     
     reports_list = [
