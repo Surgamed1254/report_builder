@@ -122,6 +122,7 @@ def search_dataframe(user_input):
         }
         for ref_id, details in report_dict.items()
     ]
+    st.write(reports_list)
     return reports_list
 
 # Example Few-Shot Template
@@ -130,33 +131,6 @@ examples = [
     {"input": "222", "output": "[{ref_id: '222', item_title: 'Tablet', customers: [{name: 'Alice Brown', phone: '5678901234', price: '150',email: 'ddaa@gmail.com',quantity:'7',date:'6/1/2025'}]}]"}
 ]
 
-# examples = [
-#     {
-#         "input": "000",
-#         "output": json.dumps([
-#             {
-#                 "ref_id": "000",
-#                 "item_title": "Laptop",
-#                 "customers": [
-#                     {"name": "John Doe", "phone": "1234567890", "price": "$100"},
-#                     {"name": "Bob White", "phone": "4321098765", "price": "$300"}
-#                 ]
-#             }
-#         ])
-#     },
-#     {
-#         "input": "222",
-#         "output": json.dumps([
-#             {
-#                 "ref_id": "222",
-#                 "item_title": "Tablet",
-#                 "customers": [
-#                     {"name": "Alice Brown", "phone": "5678901234", "price": "$150"}
-#                 ]
-#             }
-#         ])
-#     }
-# ]
 output_parser = JsonOutputParser(
             pydantic_object=Refs_Reports
         )
@@ -239,35 +213,7 @@ def generate_pdf(data, filename="customer_report.pdf"):
                 try:
                     c.setFont("Helvetica", 9)
                                         # Check if the name is too long and split it into two lines
-                    # name = customer['name']
-                    # name_width = c.stringWidth(name, "Helvetica", 10)
-
-                    # max_name_width = 120  # Max width for name to fit in one line
-
-                    # if name_width > max_name_width:
-                    #     # Split the name into two lines
-                    #     words = name.split()
-                    #     first_line = ''
-                    #     second_line = ''
-                    #     current_line = first_line
-
-                    #     # Try to fit as many words as possible in the first line
-                    #     for word in words:
-                    #         if c.stringWidth(current_line + ' ' + word if current_line else word, "Helvetica", 10) <= max_name_width:
-                    #             current_line += (' ' + word if current_line else word)
-                    #         else:
-                    #             second_line = word
-                    #             break
-
-                    #     # Move the y_position down for the second line if split
-                    #     y_position -= 15
-                    #     c.drawString(30, y_position, first_line)
-                    #     y_position -= 15
-                    #     c.drawString(30, y_position, second_line)
-                    # else:
-                    #     # No need to split, just print the name
-                    #     c.drawString(30, y_position, name)process_name(name: str)
-                    # c.drawString(30, y_position, customer['name'])
+                
                     c.drawString(30, y_position,process_name(customer['name']))
                     c.drawString(185, y_position, customer['email'])
                     c.drawString(350, y_position, customer['phone'])
@@ -293,32 +239,6 @@ def generate_pdf(data, filename="customer_report.pdf"):
 
 
 
-
-# def generate_pdf(customers, filename="customer_report.pdf"):
-#     file_path = os.path.join("temp", filename)
-#     os.makedirs("temp", exist_ok=True)
-
-#     c = canvas.Canvas(file_path, pagesize=A4)
-#     width, height = A4
-#     c.setFont("Helvetica", 12)
-
-#     c.drawString(50, height - 50, "Customer Report")
-#     y = height - 80
-
-#     for j in range(len(customers)):
-#          for i, customer in enumerate(customers[k]):
-#                 c.drawString(50, y, f"{i + 1}. Name: {customer['name']}")
-#                 c.drawString(50, y - 20, f"   Email: {customer['email']}")
-#                 c.drawString(50, y - 40, f"   Phone: {customer['phone']}")
-#                 c.drawString(50, y - 60, f"   Date: {customer['date']}")
-#                 c.drawString(50, y - 80, f"   Quantity: {customer['quantity']}")
-#                 c.drawString(50, y - 100, f"   Price: {customer['price']}")
-#                 y -= 70
-#                 if y < 50:  # Add a new page if needed
-#                     c.showPage()
-#                     c.setFont("Helvetica", 12)
-#                     y = height - 50
-                
 
    
 
@@ -376,9 +296,9 @@ def format_response(user_input: str):
     reports = search_dataframe(user_input)
     reports_summary = str(reports)
     # st.write(reports)
-    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_output_tokens=1048576, max_tokens=None)
+    # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_output_tokens=1048576, max_tokens=None)
     # agent = initialize_agent(tools=[], agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, llm=llm)
-    formatted_output = llm.invoke(example_prompt.format(input=reports_summary))
+    # formatted_output = llm.invoke(example_prompt.format(input=reports_summary))
     return formatted_output.content
 
 if "download_clicked" not in st.session_state:
@@ -387,28 +307,6 @@ if "download_clicked" not in st.session_state:
 st.set_page_config(page_title="Customers report builder", page_icon="🦜")
 st.title("🦜 Generate your report with AI ")
 
-# uploaded_file = st.file_uploader(
-#     "Upload a Data file",
-#     type=list(file_formats.keys()),
-#     help="Various File formats are Support",
-#     on_change=clear_submit,
-# )
-
-# if not uploaded_file:
-#     st.warning(
-#         "This app uses LangChain's `PythonAstREPLTool` which is vulnerable to arbitrary code execution. Please use caution in deploying and sharing this app."
-#     )
-
-# if uploaded_file:
-#     df = load_data(uploaded_file)
-
-# if "customers" in st.session_state and st.session_state["customers"]:
-#     if st.button("Generate PDF"):
-#         pdf_file = generate_pdf(st.session_state["customers"])
-#         with open(pdf_file, "rb") as f:
-#             st.download_button("Download PDF", f, file_name="customer_report.pdf", mime="application/pdf")
-
-# openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 if "messages" not in st.session_state or st.sidebar.button("Clear conversation history"):
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
 
@@ -469,52 +367,7 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
             pydantic_object=Refs_Reports
         )
 
-        # prompt_template = PromptTemplate( template="""using this variable `{input_refs}`.
-        # 1.  search in purchases history where the ref_id matches {input_refs}.
-        # 2. Return the matching records which will include:
-        #    - **Customers who purchased the item** with the corresponding `ref_id`.
-        #    - **Item title**.
-        #    - **Reference ID** (`ref_id`).
-        
-        # For the customer data, please include the following information for each customer:
-        # - **Name**
-        # - **Phone number** (`customer_phone`)
-        # - **Email address** (`customer_email`)
-        # - **Purchase date**
-        # - **Price paid**
-        # - **Quantity purchased**
-        
-        # If no relevant data is found for any of the references, return the message: "error".
-        
-        # ### Format Instructions:
-        # {format_instructions}
-        
-        # Finally, compile and return a **reports list**. This list will contain individual reports for each `ref_id`, which includes:
-        # - **Item title**
-        # - **Reference ID** (`ref_id`)
-        # - **Customers who purchased the item**
-
-        #             """,
-        # input_variables=["input_refs"],
-        # partial_variables={
-        #     "format_instructions": output_parser.get_format_instructions()
-        # }   )
-        
-        # prompt_template = PromptTemplate( template="""
-        # search for records where ref_id={input_refs}
        
-        # If no relevant data is found, return: error
-        # {format_instructions}
-        # reports_list":list of customers and item titles purchased item with ref_id={input_refs}
-
-        # """,
-        # input_variables=["input_refs"],
-        # partial_variables={
-        #     "format_instructions": output_parser.get_format_instructions()
-        # }           )
-        # prompt_text = prompt_template.format(input_refs=st.session_state.messages)
-        # response =pandas_df_agent.invoke
-        # response = pandas_df_agent.run(prompt_text, callbacks=[st_cb])
         last_message = st.session_state.messages[-1]["content"]
 
         # st.write(last_message)
@@ -563,28 +416,7 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
             st.session_state.pdf_data=pdf_file
             st.session_state.csv_data=csv_data
             st.session_state.download_clicked = True
-            # st.write('phase 1')
-            # with open(pdf_file, "rb") as f:
-                
-            #     st.download_button( "Download PDF", f, file_name="customer_report.pdf",
-            #                                mime="application/pdf",  key="download_pdf" )
-            #     st.session_state.download_clicked = True
-            #     st.session_state.pdf_data=pdf_file
-            #     st.session_state.csv_data=csv_data
-            # st.write('phase 1')
-            # st.write(new_list)
-            # print("phase 1")
-            # for i in range(len(new_list)):
-            #     st.session_state["customers"] = new_list[i]['customer_list']
-            #     print("phase 2")
-            #     st.session_state.messages.append({"role": "assistant", "content": response})
-            #     st.write(response)
-            #     print("phase 3")
-            #     if len(new_list[i]['customer_list']) > 0:
-            #         pdf_file = generate_pdf(new_list[i]['customer_list'])
-            #         with open(pdf_file, "rb") as f:
-            #             st.download_button(str(i) + "Download PDF", f, file_name=str(i) + "customer_report.pdf",
-            #                                mime="application/pdf")
+           
 
         except Exception as e:
             st.error("No data found.Please Try again." + str(e))
