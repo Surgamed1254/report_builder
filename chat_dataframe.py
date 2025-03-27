@@ -374,6 +374,7 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
         # st.write(last_message)
 
         response = format_response(last_message)
+        st.write(response)
 
         # pdf_file = generate_pdf(new_list[i]['customer_list'])
         # with open(pdf_file, "rb") as f:
