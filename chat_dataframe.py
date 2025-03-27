@@ -46,12 +46,12 @@ class Customer(BaseModel):
 
     def to_dict(self):
         return {
-            'name': self.name,
-            'email': self.email,
-            'phone': self.phone,
-            'price': self.price,
-            'quantity': self.quantity,
-            'date': self.date,
+            'name': str(self.name),
+            'email': str(self.email),
+            'phone': str(self.phone),
+            'price': str(self.price),
+            'quantity': str(self.quantity),
+            'date': str(self.date),
 
         }
 
@@ -68,8 +68,8 @@ class Report_Structure(BaseModel):
     def to_dict(self):
         return {
             'customer_list': [customer.to_dict() for customer in self.customer_list],
-            'item_title': self.item_title,
-            'ref_id': self.ref_id,
+            'item_title': str(self.item_title),
+            'ref_id': str(self.ref_id),
 
         }
 
