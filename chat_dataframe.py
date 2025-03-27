@@ -104,8 +104,8 @@ def search_dataframe(user_input):
     for _, row in results.iterrows():
         ref_id = row["ref_id"]
         if ref_id not in report_dict:
-            report_dict[ref_id] = {"item_title": row["Item Title"], "customers": []}
-        report_dict[ref_id]["customers"].append({
+            report_dict[ref_id] = {"item_title": row["Item Title"], "customer_list": []}
+        report_dict[ref_id]["customer_list"].append({
             "name": row["Name"],
             "phone": row["customer_phone"],
             "email": row["customer_email"],
@@ -118,7 +118,7 @@ def search_dataframe(user_input):
         {
             "ref_id": ref_id,
             "item_title": details["item_title"],
-            "customer_list": details["customers"]
+            "customer_list": details["customer_list"]
         }
         for ref_id, details in report_dict.items()
     ]
