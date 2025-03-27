@@ -377,7 +377,7 @@ def format_response(user_input: str):
     reports_summary = str(reports)
     # st.write(reports)
     
-    return {"reports_list": [for report in reports]}
+    return {"reports_list":reports}
 
     # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_tokens=4096)
     # # agent = initialize_agent(tools=[], agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, llm=llm)
