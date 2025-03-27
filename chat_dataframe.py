@@ -295,11 +295,12 @@ def format_response(user_input: str):
     """Formats response using LLM."""
     reports = search_dataframe(user_input)
     reports_summary = str(reports)
+    st.write(reports)
     # st.write(reports)
     # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_output_tokens=1048576, max_tokens=None)
     # agent = initialize_agent(tools=[], agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, llm=llm)
     # formatted_output = llm.invoke(example_prompt.format(input=reports_summary))
-    return formatted_output.content
+    return reports
 
 if "download_clicked" not in st.session_state:
     st.session_state.download_clicked = False
