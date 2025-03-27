@@ -107,7 +107,7 @@ def search_dataframe(user_input):
             report_dict[ref_id] = {"item_title": row["Item Title"], "customer_list": []}
         report_dict[ref_id]["customer_list"].append({
             "name": row["Name"],
-            "phone": row["customer_phone"]??"",
+            "phone": row["customer_phone"],
             "email": row["customer_email"],
             "quantity": str(row["Quantity"]),
             "price": str(row["price"]),
