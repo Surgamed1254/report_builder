@@ -376,7 +376,7 @@ def format_response(user_input: str):
     reports = search_dataframe(user_input)
     reports_summary = str(reports)
     # st.write(reports)
-    return {"reports_list":reports}
+    return {"reports_list": [report.to_dict() for report in reports]}
 
     # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_tokens=4096)
     # # agent = initialize_agent(tools=[], agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, llm=llm)
