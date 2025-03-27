@@ -122,7 +122,7 @@ def search_dataframe(user_input):
         }
         for ref_id, details in report_dict.items()
     ]
-    st.write(reports_list)
+    # st.write(reports_list)
     return reports_list
 
 # Example Few-Shot Template
@@ -300,7 +300,7 @@ def format_response(user_input: str):
     # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_output_tokens=1048576, max_tokens=None)
     # agent = initialize_agent(tools=[], agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, llm=llm)
     # formatted_output = llm.invoke(example_prompt.format(input=reports_summary))
-    return {'reports_list':str(reports)}
+    return {'reports_list':reports}
 
 if "download_clicked" not in st.session_state:
     st.session_state.download_clicked = False
@@ -385,9 +385,9 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
         try:
 
             # st.write('phase 0')
-            formatted_output = output_parser.parse('"'+str(response)+'"')
-            new_list = formatted_output['reports_list']
-            reports_data = Refs_Reports(**formatted_output)
+            # formatted_output = output_parser.parse('"'+str(response)+'"')
+            new_list = response['reports_list']
+            reports_data = Refs_Reports(**response)
 
 
             dfd = reports_to_dataframe(reports_data)
