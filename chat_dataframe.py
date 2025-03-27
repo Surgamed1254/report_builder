@@ -295,7 +295,7 @@ def format_response(user_input: str):
     """Formats response using LLM."""
     reports = search_dataframe(user_input)
     reports_summary = str(reports)
-    st.write(reports)
+    # st.write(reports)
     # st.write(reports)
     # llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", max_output_tokens=1048576, max_tokens=None)
     # agent = initialize_agent(tools=[], agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, llm=llm)
@@ -374,7 +374,7 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
         # st.write(last_message)
 
         response = format_response(last_message)
-        st.write(response)
+        # st.write(response)
 
         # pdf_file = generate_pdf(new_list[i]['customer_list'])
         # with open(pdf_file, "rb") as f:
