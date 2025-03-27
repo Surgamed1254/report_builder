@@ -533,7 +533,8 @@ if prompt := st.chat_input(placeholder="Enter the reference number "):
         try:
 
             # st.write('phase 0')
-            formatted_output = output_parser.parse(response)
+            # formatted_output = output_parser.parse(response)
+            formatted_output = response
             new_list = formatted_output['reports_list']
             reports_data = Refs_Reports(**formatted_output)
 
