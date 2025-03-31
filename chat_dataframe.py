@@ -87,7 +87,7 @@ class Refs_Reports(BaseModel):
 
 
 
-df = pd.read_csv('alpha_dataset_v6.csv')
+df = pd.read_csv('alpha_dataset_v7.csv')
 
 
 def search_dataframe(user_input):
@@ -96,6 +96,8 @@ def search_dataframe(user_input):
         user_input = ",".join(user_input)  # Convert list to a string
 
     search_terms = [term.strip() for term in user_input.replace('\n', ',').replace(' ', ',').split(',') if term]
+    # search_terms = list({term.strip().lower() for term in user_input.replace('\n', ',').replace(' ', ',').split(',') if term.strip()})
+
     # st.write(search_terms)
 
     results = df[df['ref_id'].isin(search_terms)]
