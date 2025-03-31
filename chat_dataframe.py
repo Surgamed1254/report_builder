@@ -273,7 +273,7 @@ def clear_submit():
 
 @st.cache_data
 def convert_df_to_csv(df):
-    df['date'] = df['date'].astype(str)
+   df['date'] = df['date'].astype(str)
    return df.to_csv(index=False).encode('utf-8')
 
 
