@@ -113,15 +113,15 @@ def search_dataframe(user_input):
         if ref_id not in report_dict:
             report_dict[ref_id] = {"item_title": row["Item Title"], "customer_list": []}
 
-        date_value = row["Date"]
-        date_str = date_value.strftime('%Y/%m/%d') if pd.notna(date_value) and isinstance(date_value, pd.Timestamp) else str(date_value)
+        # date_value = row["Date"]
+        # date_str = date_value.strftime('%Y/%m/%d') if pd.notna(date_value) and isinstance(date_value, pd.Timestamp) else str(date_value)
         report_dict[ref_id]["customer_list"].append({
             "name": str(row["Name"]),
             "phone": str(row["customer_phone"]),
             "email": str(row["customer_email"]),
             "quantity": str(row["Quantity"]),
             "price": str(row["price"]),
-            'date':str(date_str)
+            'date':str( row["Date"])
         })
     
     reports_list = [
@@ -276,8 +276,8 @@ def clear_submit():
 
 @st.cache_data
 def convert_df_to_csv(df):
-   df['date'] = df['date'].astype(str)
-   return df.to_csv(index=False).encode('utf-8')
+   # df['date'] = df['date'].astype(str)
+   return df.to_csv(index=False).encode('utf-8-sig')
 
 
 @st.cache_data(ttl="2h")
