@@ -112,13 +112,16 @@ def search_dataframe(user_input):
         ref_id = row["ref_id"]
         if ref_id not in report_dict:
             report_dict[ref_id] = {"item_title": row["Item Title"], "customer_list": []}
+
+        date_value = row["Date"]
+        date_str = date_value.strftime('%Y/%m/%d') if pd.notna(date_value) and isinstance(date_value, pd.Timestamp) else str(date_value)
         report_dict[ref_id]["customer_list"].append({
             "name": str(row["Name"]),
             "phone": str(row["customer_phone"]),
             "email": str(row["customer_email"]),
             "quantity": str(row["Quantity"]),
             "price": str(row["price"]),
-            'date':str(row["Date"])
+            'date':str(date_str)
         })
     
     reports_list = [
