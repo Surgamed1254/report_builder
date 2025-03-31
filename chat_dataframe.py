@@ -88,7 +88,7 @@ class Refs_Reports(BaseModel):
 
 
 df = pd.read_csv('alpha_dataset_v7.csv')
-df['Date'] = df['Date'].astype(str)
+# df['Date'] = df['Date'].astype(str)
 # df['Date'] = df['Date'].dt.strftime('%Y-%m-%d') 
 # df['Date'] = pd.to_datetime(df['Date'], errors='coerce')  
 
@@ -273,6 +273,7 @@ def clear_submit():
 
 @st.cache_data
 def convert_df_to_csv(df):
+    df['date'] = df['date'].astype(str)
    return df.to_csv(index=False).encode('utf-8')
 
 
