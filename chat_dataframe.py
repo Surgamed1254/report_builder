@@ -88,10 +88,11 @@ class Refs_Reports(BaseModel):
 
 
 df = pd.read_csv('alpha_dataset_v7.csv')
+df['Date'] = df['Date'].astype(str)
 # df['Date'] = df['Date'].dt.strftime('%Y-%m-%d') 
 # df['Date'] = pd.to_datetime(df['Date'], errors='coerce')  
 
-df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+# df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
 
 
 def search_dataframe(user_input):
